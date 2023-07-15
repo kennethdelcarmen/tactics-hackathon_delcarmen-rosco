@@ -23,49 +23,51 @@ class _LoginState extends State<LoginScreen> {
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.asset('images/logo.png'),
-            TextField(
-              controller: _usernameController,
-              decoration: InputDecoration(
-                labelText: 'Username',
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image.asset('images/logo.png'),
+              TextField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  labelText: 'Username',
+                ),
               ),
-            ),
-            SizedBox(height: 12.0),
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(
-                labelText: 'Password',
+              SizedBox(height: 12.0),
+              TextField(
+                controller: _passwordController,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                ),
+                obscureText: true,
               ),
-              obscureText: true,
-            ),
-            SizedBox(height: 24.0),
-            ElevatedButton(
-              onPressed: () {
-                // Perform login logic here
-                String username = _usernameController.text;
-                String password = _passwordController.text;
+              SizedBox(height: 24.0),
+              ElevatedButton(
+                onPressed: () {
+                  // Perform login logic here
+                  String username = _usernameController.text;
+                  String password = _passwordController.text;
 
-                ApiHandler().login(username, password).then((value) {
-                  print(value);
-                  if (value) {
-                    context.router.replaceAll([const HomeRoute()]);
-                  }
-                });
-                // You can handle the login logic or navigate to another page
-              },
-              child: Text('Login'),
-            ),
-            SizedBox(height: 12.0),
-            TextButton(
-              onPressed: () {
-                context.router.push(const RegisterRoute());
-              },
-              child: Text('Create an account'),
-            ),
-          ],
+                  ApiHandler().login(username, password).then((value) {
+                    print(value);
+                    if (value) {
+                      context.router.replaceAll([const HomeRoute()]);
+                    }
+                  });
+                  // You can handle the login logic or navigate to another page
+                },
+                child: Text('Login'),
+              ),
+              SizedBox(height: 12.0),
+              TextButton(
+                onPressed: () {
+                  context.router.push(const RegisterRoute());
+                },
+                child: Text('Create an account'),
+              ),
+            ],
+          ),
         ),
       ),
     );
